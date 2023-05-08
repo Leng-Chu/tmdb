@@ -33,10 +33,11 @@ public class InsertImpl implements Insert {
 
     public ArrayList<Integer> insert(Statement stmt) throws TMDBException {
         net.sf.jsqlparser.statement.insert.Insert statement=(net.sf.jsqlparser.statement.insert.Insert) stmt;
+
         //获取插入的table名
         Table table= statement.getTable();
-        //获取插入的column的名称
 
+        //获取插入的column的名称
         List<String> columns=new ArrayList<>();
         if(statement.getColumns()==null){
             columns=getColumns(table.getName());
@@ -46,9 +47,9 @@ public class InsertImpl implements Insert {
                 columns.add(statement.getColumns().get(i).getColumnName());
             }
         }
-        //插入的TupleList
-        SelectImpl select=new SelectImpl(memConnect);
 
+        //获取插入的TupleList
+        SelectImpl select=new SelectImpl(memConnect);
         //insert后面的values是一个select节点，获取values或者其它类型select的值
         SelectResult selectResult=select.select(statement.getSelect());
         //tuplelist就是SelectResult中实际存储tuple部分
@@ -140,7 +141,7 @@ public class InsertImpl implements Insert {
                 //通过select的getTable（classid）方法拿到另一个源类的所有tuple
                 TupleList table = select.getTable(anotherClassId);
                 //遍历另一个源类的所有tuple
-                for (int j = 0; j <= table.tuplelist.size(); j++) {
+                for (int j = 0; j < table.tuplelist.size(); j++) {
                     //拿到另一个源类的当前tuple
                     Tuple anotherTuple = table.tuplelist.get(j);
                     //通过TrajTrans.getTraj方法将当前元祖的轨迹部分转化为List<Coordinate> traj2进行后续操作
