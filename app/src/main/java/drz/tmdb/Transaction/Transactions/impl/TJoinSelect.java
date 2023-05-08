@@ -32,17 +32,16 @@ public class TJoinSelect extends SelectImpl{
         //遍历左表的tuple
         for (int i = 0; i < left.getTpl().tuplelist.size(); i++) {
             //获取当前tuple
-
-            //调用TrajTrans的getTraj方法，将tuple中的String轨迹转换成List<Coordinate>的形式，得到traj1
             Tuple tuple = left.getTpl().tuplelist.get(i);
+            //调用TrajTrans的getTraj方法，将tuple中的String轨迹转换成List<Coordinate>的形式，得到leftTraj
             List<Coordinate> leftTraj = TrajTrans.getTraj((String) tuple.tuple[2]);
             //遍历右表的每个tuple
             for (int j = 0; j < right.getTpl().tuplelist.size(); j++) {
                 //获取当前右表tuple
-                //并通过TrajTrans的getTraj方法得到List<Coordinate>，得到traj2
+                //并通过TrajTrans的getTraj方法得到List<Coordinate>，得到rightTraj
                 Tuple rightTuple = right.getTpl().tuplelist.get(j);
                 List<Coordinate> rightTraj = TrajTrans.getTraj((String) rightTuple.tuple[2]);
-                //通过longestCommonSubSequence的getCommonSubsequence方法得到traj1和traj2的公共子序列，theta值自设
+                //通过longestCommonSubSequence的getCommonSubsequence方法得到leftTraj和rightTraj的公共子序列，theta值自设
                 List<Coordinate> commonSubsequence = longestCommonSubSequence.getCommonSubsequence(leftTraj, rightTraj, 3);
                 //通过得到的子序列的长度设置阈值，判定当前子序列是否值得加入结果集合中
                 if(commonSubsequence.size()>=1){

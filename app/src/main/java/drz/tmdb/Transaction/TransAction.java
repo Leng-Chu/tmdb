@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//import drz.tmdb.Level.LevelManager;
 import drz.tmdb.level.LevelManager;
 import drz.tmdb.Log.*;
 import drz.tmdb.memory.*;
@@ -32,6 +31,7 @@ import drz.tmdb.Transaction.Transactions.Insert;
 import drz.tmdb.Transaction.Transactions.Update;
 import drz.tmdb.Transaction.Transactions.impl.CreateImpl;
 import drz.tmdb.Transaction.Transactions.impl.CreateDeputyClassImpl;
+import drz.tmdb.Transaction.Transactions.impl.CreateTJoinDeputyClassImpl;
 import drz.tmdb.Transaction.Transactions.impl.DeleteImpl;
 import drz.tmdb.Transaction.Transactions.impl.DropImpl;
 import drz.tmdb.Transaction.Transactions.impl.InsertImpl;
@@ -220,9 +220,13 @@ public class TransAction {
 //                    switch
  //                   log.WriteLog(id,k,op,s);
                     CreateDeputyClass createDeputyClass=new CreateDeputyClassImpl(memConnect);
-                    if(createDeputyClass.createDeputyClass(stmt)) {
-                        new AlertDialog.Builder(context).setTitle("提示").setMessage("创建成功").setPositiveButton("确定",null).show();
-                    }
+                    if(createDeputyClass.createDeputyClass(stmt)) new AlertDialog.Builder(context).setTitle("提示").setMessage("创建成功").setPositiveButton("确定",null).show();
+                    else new AlertDialog.Builder(context).setTitle("提示").setMessage("创建失败").setPositiveButton("确定",null).show();
+                    break;
+                case "CreateTJoinDeputyClass":
+                    CreateDeputyClass createTJoinDeputyClass=new CreateTJoinDeputyClassImpl(memConnect);
+                    if(createTJoinDeputyClass.createDeputyClass(stmt)) new AlertDialog.Builder(context).setTitle("提示").setMessage("创建成功").setPositiveButton("确定",null).show();
+                    else new AlertDialog.Builder(context).setTitle("提示").setMessage("创建失败").setPositiveButton("确定",null).show();
                     break;
 //                case "Create":
 //                    log.WriteLog(s);

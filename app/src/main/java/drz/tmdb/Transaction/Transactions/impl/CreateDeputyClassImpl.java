@@ -38,6 +38,7 @@ public class CreateDeputyClassImpl implements CreateDeputyClass {
     public boolean createDeputyClass(Statement stmt) throws TMDBException {
         return execute((net.sf.jsqlparser.statement.create.deputyclass.CreateDeputyClass) stmt);
     }
+
     //CREATE SELECTDEPUTY aa SELECT  b1+2 AS c1,b2 AS c2,b3 AS c3 FROM  bb WHERE t1="1" ;
     //2,3,aa,b1,1,2,c1,b2,0,0,c2,b3,0,0,c3,bb,t1,=,"1"
     //0 1 2  3  4 5 6  7  8 9 10 11 121314 15 16 17 18
@@ -150,7 +151,7 @@ public class CreateDeputyClassImpl implements CreateDeputyClass {
 
     //将创建deputyclass后面的selectResult拿到，用于后面的处理
      private SelectResult getSelectResult(Select select) throws TMDBException{
-         SelectImpl select1 = new SelectImpl(this.memConnect);
+        SelectImpl select1 = new SelectImpl(this.memConnect);
         SelectResult selectResult=select1.select(select);
         return selectResult;
     }
