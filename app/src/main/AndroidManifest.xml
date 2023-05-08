@@ -44,7 +44,7 @@
             android:resource="@xml/echart" />
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="a8ea392d840ee967974eb7d936ad9b0b" />
+            android:value="8c0621c17f17b8a964e21bc628ced5a4" />
 
         <service
             android:name="com.amap.api.location.APSService">

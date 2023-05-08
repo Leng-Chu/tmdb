@@ -12,14 +12,14 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
 import drz.tmdb.memory.Tuple;
-import drz.tmdb.Transaction.Transactions.Create;
-import drz.tmdb.Transaction.Transactions.Insert;
-import drz.tmdb.Transaction.Transactions.Select;
-import drz.tmdb.Transaction.Transactions.impl.CreateImpl;
-import drz.tmdb.Transaction.Transactions.impl.InsertImpl;
-import drz.tmdb.Transaction.Transactions.impl.SelectImpl;
-import drz.tmdb.Transaction.Transactions.utils.MemConnect;
-import drz.tmdb.Transaction.Transactions.utils.SelectResult;
+import drz.tmdb.memory.Transaction.Transactions.Create;
+import drz.tmdb.memory.Transaction.Transactions.Insert;
+import drz.tmdb.memory.Transaction.Transactions.Select;
+import drz.tmdb.memory.Transaction.Transactions.impl.CreateImpl;
+import drz.tmdb.memory.Transaction.Transactions.impl.InsertImpl;
+import drz.tmdb.memory.Transaction.Transactions.impl.SelectImpl;
+import drz.tmdb.memory.Transaction.Transactions.utils.MemConnect;
+import drz.tmdb.memory.Transaction.Transactions.utils.SelectResult;
 
 public class TrajectoryUtils {
 

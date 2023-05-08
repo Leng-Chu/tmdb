@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 
-import drz.tmdb.Transaction.TransAction;
+import drz.tmdb.memory.Transaction.TransAction;
 import drz.tmdb.map.MapActivity;
 
 public class MainActivity extends AppCompatActivity {
