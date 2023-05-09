@@ -30,11 +30,11 @@ public class TrajectoryUtils {
     public TrajectoryUtils(MemConnect memConnect){
         this.memConnect = memConnect;
 
-        // 初始化两张轨迹表
+        // 初始化三张轨迹表
         init();
     }
 
-    // 初始化两张轨迹表
+    // 初始化三张轨迹表
     public void init(){
         try{
             String sql1 = "CREATE CLASS mobile_phone_traj (trajectory_id int,user_id char, trajectory char);";
@@ -51,7 +51,6 @@ public class TrajectoryUtils {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     // 持久化轨迹
@@ -163,8 +162,7 @@ public class TrajectoryUtils {
     public static ArrayList<TrajectoryPoint> deserialize(String str){
         ArrayList<TrajectoryPoint> ret = new ArrayList<>();
         String[] info = str.split("-");
-        int pointCount = info.length / 2;
-        for(int i=0; i<pointCount; i++){
+        for(int i=0; i<info.length; i+=2){
             ret.add(new TrajectoryPoint(Double.parseDouble(info[i]), Double.parseDouble(info[i+1])));
         }
         return ret;
