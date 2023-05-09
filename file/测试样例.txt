@@ -1,22 +1,28 @@
 表的创建：
 CREATE CLASS mobile_phone_traj (trajectory_id int,user_id int, trajectory char);
 CREATE CLASS watch_traj (trajectory_id int,user_id int, trajectory char);
-create tjoindeputyclass tjoin as select * from mobile_phone_traj intersect select * from watch_traj;
+CREATE TJoinDeputyClass tjoin AS SELECT * FROM mobile_phone_traj INTERSECT SELECT * FROM watch_traj;
 
 查询所有元组：
-select * from mobile_phone_traj;
-select * from watch_traj;
-select * from tjoin;
+SELECT * FROM mobile_phone_traj;
+SELECT * FROM watch_traj;
+SELECT * FROM tjoin;
 
 测试数据：
 INSERT INTO mobile_phone_traj VALUES (1,1,0-1-1-2-2-3);
 INSERT INTO mobile_phone_traj VALUES (2,1,1-2-2-3-3-4-4-5);
 INSERT INTO mobile_phone_traj VALUES (3,1,1-1-2-2-5-6);
 INSERT INTO watch_traj VALUES (4,1,1-2-3-4-2-3);
-create tjoindeputyclass tjoin as select * from mobile_phone_traj intersect select * from watch_traj;
-select * from tjoin;
+CREATE TJoinDeputyClass tjoin AS SELECT * FROM mobile_phone_traj INTERSECT SELECT * FROM watch_traj;
+SELECT * FROM tjoin;
+
 INSERT INTO watch_traj VALUES (5,1,1-1-2-2-3-3);
-select * from tjoin;
+SELECT * FROM watch_traj;
+SELECT * FROM tjoin;
+
+DELETE FROM mobile_phone_traj WHERE trajectory_id = 1;
+SELECT * FROM mobile_phone_traj;
+SELECT * FROM tjoin;
 
 
 

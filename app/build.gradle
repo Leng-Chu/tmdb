@@ -32,6 +32,8 @@ dependencies {
     implementation files('libs\\jsqlparser_tmdb.jar')
     implementation files('libs\\AMap_Location_V6.2.0_20221026.jar')
     implementation files('libs\\TTorch.jar')
+    implementation files('libs\\TTorch.jar')
+    implementation files('libs\\jsqlparser_tmdb.jar')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

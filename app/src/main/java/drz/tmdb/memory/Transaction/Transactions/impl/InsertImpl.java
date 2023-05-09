@@ -111,6 +111,8 @@ public class InsertImpl implements Insert {
         tuple.tupleId=tupleid;
         memConnect.InsertTuple(tuple);
         memConnect.getTopt().objectTable.add(new ObjectTableItem(classId,tupleid));
+
+
         ArrayList<Integer> pointTo = deputySize(classId);
         ArrayList<HashMap<Integer, Integer>> deputyAttr = getDeputyAttr(pointTo.size(), classId);
         for (int i = 0; i < pointTo.size(); i++) {
@@ -128,17 +130,18 @@ public class InsertImpl implements Insert {
         LongestCommonSubSequence longestCommonSubSequence=new LongestCommonSubSequence();
         //现在由于多了基于轨迹相似度的代理类，因此，需要进行额外的逻辑处理
         //首先调用tJoinDeputySize方法得到是否当前类是否存在基于轨迹相似度的代理类，并得到代理类的id list
-        List<Integer> deputyList = tJoinDeputySize(classId);
+        ArrayList<Integer> deputyList = tJoinDeputySize(classId);
         //如果list非空就需要进一步判断
         if (!deputyList.isEmpty()){
             //调用TrajTrans.getTraj方法将当前元祖的轨迹部分转化为List<Coordinate> traj1进行后续操作
             List<Coordinate> traj1 = TrajTrans.getTraj((String) tuple.tuple[2]);
             //对代理类idlist进行遍历
-            for (Integer deputyId : deputyList) {
+            for (int i = 0; i < deputyList.size(); i++) {
                 //得到当前代理类的id
+                int deputyId=deputyList.get(i);
                 //由于基于轨迹相似度的代理类需要两个源类，需要拿到另一个源类，这里使用getAnotherDeputy方法拿到
                 int anotherClassId = getAnotherDeputy(deputyId, classId);
-                //通过select的getTable（classid）方法拿到另一个源类的所有tuple
+                //通过select的getTable(classid)方法拿到另一个源类的所有tuple
                 TupleList table = select.getTable(anotherClassId);
                 //遍历另一个源类的所有tuple
                 for (int j = 0; j < table.tuplelist.size(); j++) {
@@ -155,7 +158,9 @@ public class InsertImpl implements Insert {
                         Tuple temp1 = new Tuple();
                         temp1.tupleId=tuple.tupleId;
                         temp1.tupleIds=tuple.tupleIds;
-                        temp1.tuple=tuple.tuple;
+                        temp1.tuple=new Object[3];
+                        temp1.tuple[0]=tuple.tuple[0];
+                        temp1.tuple[1]=tuple.tuple[1];
                         //需要将得到的轨迹子序列，转换成string的形式，然后将tuple中轨迹部分设置为转换后的值
                         String trajString = TrajTrans.getString(commonSubsequence);
                         temp1.tuple[2]=trajString;

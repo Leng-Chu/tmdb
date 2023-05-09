@@ -50,7 +50,9 @@ public class TJoinSelect extends SelectImpl{
                     Tuple temp=new Tuple();
                     temp.tupleId=tuple.tupleId;
                     temp.tupleIds=tuple.tupleIds;
-                    temp.tuple=tuple.tuple;
+                    temp.tuple=new Object[3];
+                    temp.tuple[0]=tuple.tuple[0];
+                    temp.tuple[1]=tuple.tuple[1];
                     //需要将得到的轨迹子序列，转换成string的形式，然后将tuple中轨迹部分设置为转换后的值
                     String temps=TrajTrans.getString(commonSubsequence);
                     temp.tuple[2]=temps;
@@ -62,7 +64,7 @@ public class TJoinSelect extends SelectImpl{
         }
         //将左表的selectResult 也就是left的tuplelist设置为新的结果集
         left.setTpl(res);
-        //返回新的selectrResult
+        //返回新的selectResult
         return left;
     }
 }
