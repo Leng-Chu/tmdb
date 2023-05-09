@@ -95,6 +95,7 @@ public class MapActivity extends Activity implements LocationSource,
     // 在地图上绘制历史轨迹数据
     // 1号设备产生的轨迹使用红色点
     // 2号设备产生的轨迹使用蓝色点
+    // 合并出的轨迹使用黄色点
     private void drawTrace(){
         // 读取历史轨迹数据
         ArrayList<ArrayList<TrajectoryPoint>> trajectories = TrajectoryUtils.load();

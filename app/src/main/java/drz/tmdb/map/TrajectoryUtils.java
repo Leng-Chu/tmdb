@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
+import drz.tmdb.memory.Transaction.Transactions.CreateDeputyClass;
+import drz.tmdb.memory.Transaction.Transactions.impl.CreateTJoinDeputyClassImpl;
 import drz.tmdb.memory.Tuple;
 import drz.tmdb.memory.Transaction.Transactions.Create;
 import drz.tmdb.memory.Transaction.Transactions.Insert;
@@ -37,11 +39,15 @@ public class TrajectoryUtils {
         try{
             String sql1 = "CREATE CLASS mobile_phone_traj (trajectory_id int,user_id char, trajectory char);";
             String sql2 = "CREATE CLASS watch_traj (trajectory_id int,user_id char, trajectory char);";
-            Create create = new CreateImpl(memConnect);
+            String sql3 = "CREATE TJoinDeputyClass tjoin AS SELECT * FROM mobile_phone_traj INTERSECT SELECT * FROM watch_traj;";
+            Create create1 = new CreateImpl(memConnect);
+            CreateDeputyClass create2 = new CreateTJoinDeputyClassImpl(memConnect);
             Statement parse1 = CCJSqlParserUtil.parse(sql1);
             Statement parse2 = CCJSqlParserUtil.parse(sql2);
-            create.create(parse1);
-            create.create(parse2);
+            Statement parse3 = CCJSqlParserUtil.parse(sql3);
+            create1.create(parse1);
+            create1.create(parse2);
+            create2.createDeputyClass(parse3);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -80,16 +86,22 @@ public class TrajectoryUtils {
         ArrayList<ArrayList<TrajectoryPoint>> ret = new ArrayList<ArrayList<TrajectoryPoint>>();
         String sql1 = "SELECT * FROM mobile_phone_traj;";
         String sql2 = "SELECT * FROM watch_traj;";
+        String sql3 = "SELECT * FROM tjoin;";
         try{
             Select select = new SelectImpl(memConnect);
             Statement parse1 = CCJSqlParserUtil.parse(sql1);
             SelectResult result1 = select.select(parse1);
             Statement parse2 = CCJSqlParserUtil.parse(sql2);
             SelectResult result2 = select.select(parse2);
+            Statement parse3 = CCJSqlParserUtil.parse(sql3);
+            SelectResult result3 = select.select(parse3);
             for(Tuple t: result1.getTpl().tuplelist){
                 ret.add(deserialize((String) t.tuple[2]));
             }
             for(Tuple t: result2.getTpl().tuplelist){
+                ret.add(deserialize((String) t.tuple[2]));
+            }
+            for(Tuple t: result3.getTpl().tuplelist){
                 ret.add(deserialize((String) t.tuple[2]));
             }
         }catch (Exception e){
