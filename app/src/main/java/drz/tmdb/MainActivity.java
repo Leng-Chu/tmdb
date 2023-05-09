@@ -8,14 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import java.io.IOException;
 
-import drz.tmdb.memory.Transaction.TransAction;
 import drz.tmdb.map.MapActivity;
+import drz.tmdb.memory.Transaction.TransAction;
 
 public class MainActivity extends AppCompatActivity {
 
