@@ -10,8 +10,6 @@ Totem Mobile Database at WHU.
 
 组员：周恋程、钟继川、谭垒鑫、赵天阔、彭焯、唐家乐。
 
-运行前在app目录下添加libs目录，添加jar包。
-
 ##### 原项目：
 
 武汉大学移动端Totem数据库系统 [https://github.com/whu-totemdb/tmdb]
